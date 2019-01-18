@@ -6,6 +6,7 @@
 //  Copyright © 2018 Thufik. All rights reserved.
 //
 
+import CoreArchitecture
 import UIKit
 
 @UIApplicationMain
@@ -13,9 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        if let loginView = self.window?.rootViewController as? LoginViewController{
+            let loginComponent = LoginComponent(state: LoginState(isLoading: false, hasError: nil))
+            loginView.loginComponent = loginComponent
+            loginView.core = Core(rootComponent: loginComponent)
+        }
+        
         return true
     }
 
